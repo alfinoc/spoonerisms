@@ -26,7 +26,7 @@ class RedisStore:
       return filter(lambda s : s in enabled, self.getFullList())
 
    def addSpoon(self, spoon, enabled=False, date=datetime.now()):
-      if self.store.exists(spoon):
+      if self.store.exists(spoon + ':date'):
          raise ValueError('Existing entry for %s.' % spoon)
 
       self.store.rpush('list', spoon)

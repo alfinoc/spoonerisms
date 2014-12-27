@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Archive</title>
+</head>
+<body>
+   <ol>
+      {% for s in spoons %}
+         <li><span>{{ s }}</span></li>
+      {% endfor %}
+   </ol>
+   {% include 'footer.html' %}
+</body>
+</html>
