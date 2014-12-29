@@ -1,14 +1,16 @@
 body {
    margin: 0;
    padding: 0;
-   font-family: Gill Sans;
-   font-weight: lighter;
+   font-family: Avenir Next, Roboto_Backup_Light, sans-serif;
+}
+
+body > *:first-child {
+   padding-top: 10%;
 }
 
 .footer {
    text-align: center;
-   font-weight: lighter;
-   padding-top: 20px;
+   padding-top: 10%;
    padding-bottom: 20px;
 }
 
@@ -29,4 +31,15 @@ a {
 .subscript span {
    font-style: normal;
    color: black;
+}
+
+input {
+   font-family: inherit;
+   font-weight: inherit;
+}
+
+ul {
+   list-style: none;
+   padding: 0;
+   margin: 0;
 }

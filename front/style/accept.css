@@ -1,0 +1,15 @@
+@import url('/style/main.css');
+
+img {
+   display: block;
+   margin: auto;
+}
+
+body > div:first-child {
+   text-align: center;
+   font-size: 100pt;
+}
+
+img ~ .footer {
+   padding-top: 30px;
+}

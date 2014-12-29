@@ -4,7 +4,7 @@ body {
    text-align: center;
 }
 
-body div:first-child {
+body > *:first-child {
    padding-top: 12%;
 }
 
@@ -14,8 +14,4 @@ body div:first-child {
 
 .subscript {
    font-size: 30pt;
-}
-
-.footer {
-   margin-top: 10%;
 }

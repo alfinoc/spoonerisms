@@ -1,0 +1,16 @@
+@import url('/style/main.css');
+
+form {
+   text-align: center;
+}
+
+form input[type="text"] {
+   display: inline-block;
+   width: 375px;
+   font-size: xx-large;
+}
+
+form input[type="submit"] {
+   margin-top: 5%;
+   font-size: larger;
+}

@@ -4,15 +4,15 @@ body {
    text-align: center;
 }
 
-.subscript {
-   color: #777;
-}
-
-ol {
+ul, input:not([type="checkbox"]) {
+   text-align: center;
    display: inline-block;
    margin: auto;
    text-align: left;
-   font-size: larger;
+}
+
+ul {
+   padding-bottom: 30px;
 }
 
 .footer {

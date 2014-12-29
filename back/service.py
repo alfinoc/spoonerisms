@@ -32,8 +32,8 @@ class SpoonerismService(object):
          spoon = request.args['spoon']
          self.store.addSpoon(spoon)
       except:
-         return self.render('taco.html', ext='uhhh')
-      return self.render('accept.html', ext='thanks')
+         return self.render('taco.html', ext='accept')
+      return self.render('accept.html', ext='accept')
 
    def get_screen(self, request, ext='screen'):
       full = self.store.getFullList();
