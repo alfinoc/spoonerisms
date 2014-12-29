@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <title>Home</title>
-</head>
-<body>
-   <div>{{ index }}. <span>{{ spoon }}</span></div>
-   {% include 'footer.html' %}
-</body>
-</html>
+{% include 'header.html' %}
+<div class="subscript">
+   {{ index }}.
+   <a href="/{{ ext }}"><span>{{ spoon }}</span></a></div>
+{% include 'footer.html' %}

@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <title>Screen</title>
-</head>
-<body>
-   <form action="/modified" method="POST">
-      <ul>
-      {% for s in spoons %}
-         <li>
-            <label>
-               <input type="checkbox" {% if s.enabled %} checked {% endif %}name="{{ s.spoon }}">
-               {{ s.spoon }}
-            </label>
-         </li>
-      {% endfor %}
-      </ul>
-      <input type="submit" value="Submit">
-   </form>
-   {% include 'footer.html' %}
-</body>
-</html>
+{% include 'header.html' %}
+<form action="/modified" method="POST">
+   <ul>
+   {% for s in spoons %}
+      <li>
+         <label>
+            <input type="checkbox" {% if s.enabled %} checked {% endif %}name="{{ s.spoon }}">
+            {{ s.spoon }}
+         </label>
+      </li>
+   {% endfor %}
+   </ul>
+   <input type="password" name="password">
+   <input type="submit" value="Submit">
+</form>
+{% include 'footer.html' %}

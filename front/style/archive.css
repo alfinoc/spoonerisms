@@ -1,0 +1,21 @@
+@import url('/style/main.css');
+
+body {
+   text-align: center;
+}
+
+.subscript {
+   color: #777;
+}
+
+ol {
+   display: inline-block;
+   margin: auto;
+   text-align: left;
+   padding-top: 10%;
+   font-size: larger;
+}
+
+.footer {
+
+}

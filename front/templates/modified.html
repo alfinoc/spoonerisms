@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <title>Archive</title>
-</head>
-<body>
-   {% if modded|length != 0 %}
-      Modified:
-      <ul>
-         {% for s in modded %}
-            <li>{{ s }}</li>
-         {% endfor %}
-      </ul>
-   {% else %}
-      <div>You didn't change anything!</div>
-   {% endif %}
-   {% include 'footer.html' %}
-</body>
-</html>
+{% include 'header.html' %}
+{% if modded|length != 0 %}
+   Modified:
+   <ul>
+      {% for s in modded %}
+         <li>{{ s }}</li>
+      {% endfor %}
+   </ul>
+{% else %}
+   <div>You didn't change anything!</div>
+{% endif %}
+{% include 'footer.html' %}
