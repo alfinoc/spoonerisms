@@ -1,11 +1,15 @@
 from werkzeug.wrappers import Request, Response
 from werkzeug.routing import Map, Rule
-from werkzeug.exceptions import HTTPException, BadRequest
+from werkzeug.exceptions import HTTPException, BadRequest, Forbidden
 from jinja2 import Environment, FileSystemLoader
 from json import loads, dumps
 from random import randint
+from operator import add as concat
+from passlib.apps import custom_app_context as pwd_context
 
 from persistent import RedisStore
+
+HASH_FILE = 'pass.hash'
 
 class SpoonerismService(object):
 
@@ -13,32 +17,38 @@ class SpoonerismService(object):
       enabled = self.store.getEnabledList()
       index = randint(0, len(enabled) - 1)
       spoon = enabled[index]
-      return self.render('random.html', index=index + 1, spoon=spoon)
+      return self.render('random.html', index=index + 1, spoon=spoon,
+                         ext='random')
 
    def get_archive(self, request):
       enabled = self.store.getEnabledList()
-      return self.render('archive.html', spoons=enabled)
+      return self.render('archive.html', spoons=enabled, ext='archive')
 
    def get_submit(self, request):
-      return self.render('submit.html')
+      return self.render('submit.html', ext='submit')
 
-   def get_accept(self, request):
+   def get_accept(self, request, ext='accept'):
       try:
          spoon = request.args['spoon']
          self.store.addSpoon(spoon)
       except:
-         pass
-      return self.render('accept.html')
+         return self.render('taco.html', ext='uhhh')
+      return self.render('accept.html', ext='thanks')
 
-   def get_screen(self, request):
+   def get_screen(self, request, ext='screen'):
       full = self.store.getFullList();
       enabled = self.store.getEnabledList()
       full = map(lambda s : {'spoon': s, 'enabled': s in enabled}, full)
-      return self.render('screen.html', spoons=full)
+      return self.render('screen.html', spoons=full, ext='screen')
 
-   def get_modified(self, request):
+   def get_modified(self, request, ext='modified'):
+      submission = ''
+      if 'password' in request.form:
+         submission = request.form['password']
+      if not pwd_context.verify(submission, self.password):
+         return Forbidden('Wrong password.')
       prev = set(self.store.getEnabledList())
-      new = set(request.form.keys())
+      new = set(request.form.keys()) - set(['password'])
       whitelist = new - prev
       blacklist = prev - new
       delta = set()
@@ -46,7 +56,8 @@ class SpoonerismService(object):
          self.store.disable(s)
       for s in whitelist:
          self.store.enable(s)
-      return self.render('modified.html', modded=whitelist.union(blacklist))
+      return self.render('modified.html', modded=whitelist.union(blacklist),
+                         ext='modified')
 
    """
    dispatch requests to appropriate functions above
@@ -61,6 +72,7 @@ class SpoonerismService(object):
          Rule('/modified', endpoint='modified'),
          Rule('/<all>', redirect_to=''),
       ])
+      self.password = reduce(concat, open(HASH_FILE)).strip()
       self.store = RedisStore()
       self.jinja_env = Environment(loader=FileSystemLoader(template_path),
                                    autoescape=True)
