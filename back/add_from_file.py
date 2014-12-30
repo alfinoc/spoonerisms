@@ -18,3 +18,4 @@ spoons = map(lineToPackage, f)
 store = RedisStore()
 for s in spoons:
    store.addSpoon(s['spoon'], s['enabled'], parseDate(s['date']))
+store.store.save()
